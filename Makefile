@@ -43,6 +43,7 @@ else
 	docker-compose exec $(APACHE_PHP_CONTAINER) $(SHELL) -c "rm -f $(TMP_SYMFONY_DIR)/compose*.yaml && mv $(TMP_SYMFONY_DIR)/* /app && mv $(TMP_SYMFONY_DIR)/.* /app && rm -rf $(TMP_SYMFONY_DIR)"
 
 	@echo "Installing symfony/apache-pack..."
+	docker-compose exec $(APACHE_PHP_CONTAINER) $(SHELL) -c "composer config extra.symfony.allow-contrib true"
 	docker-compose exec $(APACHE_PHP_CONTAINER) $(SHELL) -c "composer require symfony/apache-pack"
 	
 	@echo "Starting the project..."
