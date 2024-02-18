@@ -24,6 +24,7 @@ help:
 	@echo "  init-dev    Initialize dev environment with docker"
 	@echo "  clear       Clear the cache"
 	@echo "  start       Start the project"
+	@echo "  database    Create the database"
 
 # Define the init-dev target to initialize dev environment with docker
 init-dev:
@@ -59,3 +60,7 @@ start:
 	$(BUILD_DOCKER)
 	docker-compose exec $(APACHE_PHP_CONTAINER) $(SHELL) -c "symfony server:start -d"
 	make clear
+
+# Define the database target to create the database
+database:
+	docker-compose exec $(APACHE_PHP_CONTAINER) $(SHELL) -c "symfony console doctrine:database:create"

@@ -11,5 +11,32 @@ services:
     networks:
       - dev
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+    networks:
+      - dev
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    networks:
+      - dev
+
 networks:
   dev:
+
+volumes:
+  mysql-data:
