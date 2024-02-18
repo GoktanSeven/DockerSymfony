@@ -1,0 +1,15 @@
+services:
+
+  apache_php:
+    build: docker/apache_php
+    container_name: app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/app
+    restart: always
+    networks:
+      - dev
+
+networks:
+  dev:
